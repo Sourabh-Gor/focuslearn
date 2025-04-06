@@ -1,0 +1,29 @@
+<div class="podcast-container" @fadeInOut>
+    <h2>🎙️ PDF to Podcast</h2>
+  
+    <mat-form-field appearance="fill" class="material-select" @fadeInOut>
+      <mat-label>Select a PDF</mat-label>
+      <mat-select [(value)]="selectedMaterialId">
+        <mat-option *ngFor="let mat of materials" [value]="mat.id">
+          {{ mat.file_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" (click)="generatePodcast()" [disabled]="!selectedMaterialId || loading" class="generate-button" @fadeInOut>
+      🎧 Generate Podcast
+    </button>
+  
+    <div class="loading-spinner" *ngIf="loading" @fadeInOut>
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Generating podcast... Please wait</p>
+    </div>
+  
+    <div *ngIf="audioSrc && !loading" class="player" @fadeInOut>
+      <audio controls [src]="audioSrc"></audio>
+      <a [href]="audioSrc" download="podcast.mp3">
+        <button mat-stroked-button color="accent">⬇️ Download Podcast</button>
+      </a>
+    </div>
+  </div>
+  

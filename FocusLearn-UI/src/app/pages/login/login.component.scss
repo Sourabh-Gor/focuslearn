@@ -1,0 +1,315 @@
+/* 🚀 Login Page Layout */
+.login-page {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #1e3a8a, #4fc3f7);
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  overflow: hidden;
+}
+
+/* 🎨 Carousel Container - Reduced Height */
+.carousel-container {
+  width: 55%;
+  height: 80vh; /* Reduced height for better proportions */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🎨 Improved Carousel Card */
+.carousel-card {
+  width: 90%;
+  height: 100%;
+  padding: 30px; /* More padding for breathing space */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#loginCarousel {
+ margin-bottom: 10px;
+}
+
+/* ✅ Fix for Heading & Paragraph */
+.carousel-card h1 {
+  font-size: 2.4rem; /* Increased size for better readability */
+  font-weight: bold;
+  margin-bottom: 18px;
+}
+
+.carousel-card p {
+  font-size: 1.2rem;
+  margin-bottom: 20px; /* More spacing for better flow */
+  line-height: 1.5; /* Improved readability */
+}
+
+/* 🚀 Make the carousel take proper space */
+.carousel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ✅ Ensuring carousel fills the container */
+.carousel-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ✅ Properly Adjust Image */
+.carousel-image {
+  width: 80%;
+  height: 60vh; /* Optimized image height */
+  object-fit: fill; /* Prevents stretching */
+  border-radius: 8px;
+  display: block;
+}
+
+/* 🎨 Fixed Caption Positioning */
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.75); /* Slightly darker for better contrast */
+  color: white;
+  padding: 15px 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 10px 10px;
+  opacity: 0.9;
+}
+/* 🔄 Improved Slide Effects - Now with Fade & Zoom */
+.carousel-item {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.carousel-item.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 🎨 Smooth Image Scaling for Better Visuals */
+.carousel-image {
+  width: 100%;
+  height: 60vh;
+  object-fit: fill;
+  border-radius: 8px;
+  display: block;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* 🎥 Subtle Image Zoom on Active Slide */
+.carousel-item.active .carousel-image {
+  transform: scale(1.02);
+}
+
+/* 📢 Caption Fade-in Effect */
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 15px 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 10px 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease-in-out, transform 0.5s ease-in-out;
+}
+
+/* 🏆 Show Caption on Active Slide */
+.carousel-item.active .carousel-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 🚀 Bold & Visible Navigation Buttons */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.6); /* Dark semi-transparent background */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%; /* Ensures vertical centering */
+  transform: translateY(-50%); /* Centers precisely */
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* 🌊 Cool Ripple Hover Effect */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background: rgba(206, 203, 203, 0.8); /* Darker on hover */
+  transform: translateY(-50%) scale(1.1); /* Subtle scale effect */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); /* Soft shadow for depth */
+}
+
+/* 📢 Click Effect - Smooth Press Down */
+.carousel-control-prev:active,
+.carousel-control-next:active {
+  transform: translateY(-50%) scale(0.95); /* Shrinks slightly */
+  box-shadow: none;
+}
+
+/* 🎨 Icon Styling for Visibility */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: brightness(1) invert(1); /* Makes icons white for high contrast */
+  width: 50%;
+  height: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* 🔄 Subtle Wobble Effect on Hover */
+.carousel-control-prev:hover .carousel-control-prev-icon {
+  transform: rotate(-10deg);
+}
+.carousel-control-next:hover .carousel-control-next-icon {
+  transform: rotate(10deg);
+}
+
+
+/* ✨ Cool "Pop-in" Effect When Buttons are Clicked */
+.carousel-control-prev:active,
+.carousel-control-next:active {
+  transform: scale(0.9);
+}
+
+/* 🌀 Smooth Infinite Loop Animation */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.carousel-item.active {
+  animation: slide-in 0.8s ease-in-out;
+}
+
+/* Right Side: Login */
+.login-container {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-card {
+    padding: 40px;
+    width: 420px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background: white;
+    animation: fadeIn 0.5s ease-in-out;
+
+    .highlight {
+      color: #3fec48;
+    }
+
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .forgot-password {
+      display: block;
+      text-align: right;
+      font-size: 0.9rem;
+      color: #1a237e;
+      text-decoration: none;
+      margin-bottom: 10px;
+    }
+
+    .cta-btn {
+      width: 100%;
+      margin-top: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 14px;
+      background: #66bb6a;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background: #43a047;
+        box-shadow: 0 4px 10px rgba(102, 187, 106, 0.4);
+      }
+    }
+
+    .google-btn {
+      width: 100%;
+      margin-top: 10px;
+      background: white;
+      color: #555;
+      font-weight: bold;
+      padding: 14px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background: #f5f5f5;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .google-icon {
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    .signup-text {
+      margin-top: 15px;
+      font-size: 0.9rem;
+
+      a {
+        color: #1a237e;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

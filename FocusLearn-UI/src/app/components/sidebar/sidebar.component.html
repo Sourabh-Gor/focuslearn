@@ -1,0 +1,19 @@
+<div class="sidebar" [@sidebarState]="isExpanded ? 'expanded' : 'collapsed'">
+  <div class="logo-container">
+    <h1 class="app-name-1" *ngIf="isExpanded">Focus<span class="app-name-2">Learn</span></h1>
+    <img src="assets/logo3.png" alt="FocusLearn Icon" class="logo-icon" *ngIf="!isExpanded">
+  </div>
+  
+  <div class="modules-container">
+    <div class="module" *ngFor="let module of modules" [routerLink]="module.route" routerLinkActive="active">
+      <div class="icon-container">
+        <mat-icon>{{module.icon}}</mat-icon>
+      </div>
+      <span class="module-name" [@fadeInOut]="isExpanded ? 'visible' : 'hidden'">{{module.name}}</span>
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="version" *ngIf="isExpanded">v1.0.0</div>
+  </div>
+</div>

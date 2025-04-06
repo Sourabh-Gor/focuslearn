@@ -1,0 +1,65 @@
+<div class="flashcard-list-container">
+    <div class="list-header">
+      <h1>My Flashcards</h1>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Filter by Material</mat-label>
+        <mat-select [(ngModel)]="selectedMaterialId" (selectionChange)="filterFlashcards()">
+          <mat-option [value]="0">All Materials</mat-option>
+          <mat-option *ngFor="let material of materials" [value]="material.id">
+            {{ material.file_name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!-- Loading spinner -->
+    <div class="loading-container" *ngIf="isLoading()">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="!isLoading() && (!flashcards || flashcards.length === 0)">
+      <mat-icon class="empty-icon">school</mat-icon>
+      <h2>No flashcards found</h2>
+      <p *ngIf="selectedMaterialId !== 0">Try selecting a different material or create new flashcards</p>
+      <p *ngIf="selectedMaterialId === 0">Select a study material and start creating flashcards!</p>
+    </div>
+
+    <!-- Flashcard grid -->
+    <div class="flashcard-grid" *ngIf="!isLoading() && flashcards && flashcards.length > 0">
+      <div class="flashcard-wrapper" *ngFor="let flashcard of flashcards">
+        <div class="flashcard-container">
+          <div class="flashcard" [class.flipped]="flippedCards[flashcard.id]">
+            <div class="card-face front">
+              <mat-card>
+                <mat-card-content>
+                  <p>{{ flashcard.front_content }}</p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="card-face back">
+              <mat-card>
+                <mat-card-content>
+                  <p>{{ formatBackContent(flashcard.back_content) }}</p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flashcard-actions">
+          <button mat-raised-button class="flip-button" (click)="flipCard(flashcard.id)">
+            <mat-icon>cached</mat-icon> FLIP
+          </button>
+          <button mat-raised-button class="regen-button" (click)="regenerateAnswer(flashcard)">
+            <mat-icon>refresh</mat-icon> REGENERATE
+          </button>
+          <button mat-raised-button class="delete-button" (click)="deleteFlashcard(flashcard.id)">
+            <mat-icon>delete</mat-icon> DELETE
+          </button>
+        </div>
+        <mat-divider class="card-divider"></mat-divider>
+      </div>
+    </div>
+  </div>

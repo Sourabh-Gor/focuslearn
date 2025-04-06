@@ -1,0 +1,79 @@
+<div class="login-page">
+  <!-- Left Side: Carousel -->
+  <div class="carousel-container">
+    <mat-card class="carousel-card">
+      <mat-card-content>
+        <h1>Welcome to <span class="highlight">FocusLearn</span></h1>
+        <p>AI-powered intelligent learning assistant designed to boost your productivity and keep you focused.</p>
+      </mat-card-content>
+  
+      <!-- Bootstrap Carousel -->
+      <div id="loginCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="assets/web learning.jpg" class="d-block w-100 carousel-image" alt="Feature 1">
+            <div class="carousel-caption">
+              <p>AI-powered learning</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="assets/learningStuff.jpg" class="d-block w-100 carousel-image" alt="Feature 2">
+            <div class="carousel-caption">
+              <p>Personalized Study Plans</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="assets/feature3.jpg" class="d-block w-100 carousel-image" alt="Feature 3">
+            <div class="carousel-caption">
+              <p>Gamified Learning Experience</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#loginCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#loginCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+  
+
+  <!-- Right Side: Login Form -->
+  <div class="login-container">
+    <mat-card class="login-card">
+      <mat-card-title>Login to <span class="highlight">FocusLearn</span></mat-card-title>
+
+      <form (submit)="onLogin()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email" required />
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required />
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <a routerLink="/forgot-password" class="forgot-password">Forgot password?</a>
+
+        <button mat-raised-button color="primary" class="cta-btn" type="submit">Login</button>
+
+        <button mat-raised-button class="google-btn" (click)="onGoogleLogin()">
+          <img src="assets/google-icon.svg" class="google-icon" alt="Google"> Sign in with Google
+        </button>
+
+        <p class="signup-text">
+          Don't have an account? <a routerLink="/signup">Sign up</a>
+        </p>
+      </form>
+    </mat-card>
+  </div>
+</div>

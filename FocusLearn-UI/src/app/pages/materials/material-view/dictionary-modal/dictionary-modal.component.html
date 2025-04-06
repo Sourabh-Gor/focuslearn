@@ -1,0 +1,81 @@
+<div class="dictionary-modal">
+  <div class="modal-header">
+    <h2 mat-dialog-title>Dictionary</h2>
+    <button mat-icon-button class="close-btn" (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search for a word</mat-label>
+      <input matInput [formControl]="searchControl" placeholder="Type a word" #searchInput>
+      <button mat-icon-button matSuffix *ngIf="searchControl.value" (click)="searchControl.setValue(''); searchInput.focus()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-flat-button color="primary" matSuffix (click)="lookupWord(searchControl.value || '')">
+        <mat-icon>search</mat-icon> Search
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-content class="scrollable-content">
+    <mat-spinner *ngIf="isLoading" diameter="40" class="loader"></mat-spinner>
+    
+    <div *ngIf="errorMessage" class="error-message">
+      <mat-icon>error_outline</mat-icon> {{ errorMessage }}
+    </div>
+    
+    <div *ngIf="searchResults.length > 0" class="results">
+      <mat-card *ngFor="let result of searchResults" class="word-result">
+        <mat-card-header>
+          <mat-card-title>{{ result.word }}</mat-card-title>
+          <mat-card-subtitle class="phonetics">
+            <div *ngFor="let phonetic of result.phonetics" class="phonetic-item">
+              <span *ngIf="phonetic.text" class="phonetic-text">{{ phonetic.text }}</span>
+              <button mat-icon-button *ngIf="phonetic.audio" color="accent" (click)="playAudio(phonetic.audio)">
+                <mat-icon>volume_up</mat-icon>
+              </button>
+            </div>
+          </mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-divider></mat-divider>
+        
+        <mat-card-content>
+          <div *ngFor="let meaning of result.meanings" class="meaning">
+            <h4 class="part-of-speech">{{ meaning.partOfSpeech }}</h4>
+            
+            <div *ngIf="meaning.definitions.length > 0" class="definitions">
+              <h5>Definitions</h5>
+              <ol class="definitions-list">
+                <li *ngFor="let def of meaning.definitions">
+                  <p>{{ def.definition }}</p>
+                  <p *ngIf="def.example" class="example"><em>Example:</em> "{{ def.example }}"</p>
+                </li>
+              </ol>
+            </div>
+            
+            <div *ngIf="meaning.synonyms?.length > 0" class="synonyms">
+              <h5>Synonyms</h5>
+              <mat-chip-listbox>
+                <mat-chip *ngFor="let synonym of meaning.synonyms" (click)="lookupWord(synonym)" color="primary" highlighted>
+                  {{ synonym }}
+                </mat-chip>
+              </mat-chip-listbox>
+            </div>
+            
+            <div *ngIf="meaning.antonyms?.length > 0" class="antonyms">
+              <h5>Antonyms</h5>
+              <mat-chip-listbox>
+                <mat-chip *ngFor="let antonym of meaning.antonyms" (click)="lookupWord(antonym)" color="warn" highlighted>
+                  {{ antonym }}
+                </mat-chip>
+              </mat-chip-listbox>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

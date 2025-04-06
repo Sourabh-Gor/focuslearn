@@ -1,0 +1,42 @@
+<!-- materials.component.html -->
+<div class="materials-container">
+    <div class="header">
+      <h2>Your Study Materials</h2>
+      <button mat-fab color="primary" (click)="openUploadDialog()" [@fadeIn]>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  
+    <div class="materials-grid" *ngIf="uploadedMaterials.length > 0" [@fadeIn]>
+      <mat-card 
+        *ngFor="let material of uploadedMaterials" 
+        class="material-card"
+        [@cardHover]="material.isHovered ? 'hovered' : 'normal'"
+        (mouseenter)="material.isHovered = true"
+        (mouseleave)="material.isHovered = false"
+      >
+        <div class="preview">
+          <img [src]="getPreviewUrl(material)" alt="Preview" class="preview-img" (error)="onImageError($event, material)">
+        </div>
+        <mat-card-content>
+          <h4>{{ material.file_name }}</h4>
+          <p>Uploaded: {{ material.upload_date | date }}</p>
+          <p>Size: {{ material.file_size | number }} bytes</p>
+          <p>Type: {{ material.file_type || guessFileType(material.file_name) }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button color="primary" (click)="viewMaterial(material)" title="View Material">
+            <mat-icon>visibility</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  
+    <div class="no-materials" *ngIf="uploadedMaterials.length === 0  && !isLoading" [@fadeIn]>
+      <p>No materials uploaded yet. Click the + button to add some!</p>
+    </div>
+
+    <div *ngIf="isLoading" class="no-materials">
+        <mat-spinner diameter="20"></mat-spinner>
+      </div>
+  </div>

@@ -1,0 +1,191 @@
+<!-- calculator.component.html -->
+<button mat-icon-button (click)="closePopup()" class="close-button">
+    <mat-icon>close</mat-icon>
+  </button>
+<div class="calculator-container">
+
+    <div class="calculator-header">
+      <div class="display">{{ display }}</div>
+      <div class="mode-toggles">
+        <button mat-button (click)="toggleScientificMode()">
+          {{ isScientificMode ? 'Basic' : 'Scientific' }}
+        </button>
+        <button mat-button (click)="toggleConversionMode()">
+          {{ isConversionMode ? 'Standard' : 'Conversion' }}
+        </button>
+        <button mat-icon-button (click)="toggleHistory()">
+          <mat-icon>history</mat-icon>
+        </button>
+        
+      </div>
+    </div>
+  
+    <!-- Standard Calculator -->
+    <div *ngIf="!isScientificMode && !isConversionMode" class="calculator-standard">
+      <div class="calc-row">
+        <button mat-button (click)="memoryClear()">MC</button>
+        <button mat-button (click)="memoryRecall()">MR</button>
+        <button mat-button (click)="memoryAdd()">M+</button>
+        <button mat-button (click)="memorySubtract()">M-</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="clearEntry()">CE</button>
+        <button mat-button (click)="allClear()">C</button>
+        <button mat-button (click)="toggleSign()">±</button>
+        <button mat-button (click)="handleOperator('/')" class="operator">÷</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="inputDigit('7')">7</button>
+        <button mat-button (click)="inputDigit('8')">8</button>
+        <button mat-button (click)="inputDigit('9')">9</button>
+        <button mat-button (click)="handleOperator('*')" class="operator">×</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="inputDigit('4')">4</button>
+        <button mat-button (click)="inputDigit('5')">5</button>
+        <button mat-button (click)="inputDigit('6')">6</button>
+        <button mat-button (click)="handleOperator('-')" class="operator">−</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="inputDigit('1')">1</button>
+        <button mat-button (click)="inputDigit('2')">2</button>
+        <button mat-button (click)="inputDigit('3')">3</button>
+        <button mat-button (click)="handleOperator('+')" class="operator">+</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="percentage()">%</button>
+        <button mat-button (click)="inputDigit('0')">0</button>
+        <button mat-button (click)="inputDecimal()">.</button>
+        <button mat-button (click)="calculate()" class="equals">=</button>
+      </div>
+    </div>
+  
+    <!-- Scientific Calculator -->
+    <div *ngIf="isScientificMode && !isConversionMode" class="calculator-scientific">
+      <div class="calc-row">
+        <button mat-button (click)="toggleAngleMode()">
+          {{ isDegreeMode ? 'DEG' : 'RAD' }}
+        </button>
+        <button mat-button (click)="calculateFactorial()">x!</button>
+        <button mat-button (click)="calculatePi()">π</button>
+        <button mat-button (click)="calculateE()">e</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="memoryClear()">MC</button>
+        <button mat-button (click)="memoryRecall()">MR</button>
+        <button mat-button (click)="memoryAdd()">M+</button>
+        <button mat-button (click)="memorySubtract()">M-</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="calculateSin()">sin</button>
+        <button mat-button (click)="calculateCos()">cos</button>
+        <button mat-button (click)="calculateTan()">tan</button>
+        <button mat-button (click)="handleOperator('^')">x<sup>y</sup></button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="calculateLog()">log</button>
+        <button mat-button (click)="calculateLn()">ln</button>
+        <button mat-button (click)="calculateSqrt()">√</button>
+        <button mat-button (click)="handleOperator('/')" class="operator">÷</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="clearEntry()">CE</button>
+        <button mat-button (click)="allClear()">C</button>
+        <button mat-button (click)="toggleSign()">±</button>
+        <button mat-button (click)="handleOperator('*')" class="operator">×</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="inputDigit('7')">7</button>
+        <button mat-button (click)="inputDigit('8')">8</button>
+        <button mat-button (click)="inputDigit('9')">9</button>
+        <button mat-button (click)="handleOperator('-')" class="operator">−</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="inputDigit('4')">4</button>
+        <button mat-button (click)="inputDigit('5')">5</button>
+        <button mat-button (click)="inputDigit('6')">6</button>
+        <button mat-button (click)="handleOperator('+')" class="operator">+</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="inputDigit('1')">1</button>
+        <button mat-button (click)="inputDigit('2')">2</button>
+        <button mat-button (click)="inputDigit('3')">3</button>
+        <button mat-button (click)="percentage()">%</button>
+      </div>
+      <div class="calc-row">
+        <button mat-button (click)="inputDigit('0')" class="double-width">0</button>
+        <button mat-button (click)="inputDecimal()">.</button>
+        <button mat-button (click)="calculate()" class="equals">=</button>
+      </div>
+    </div>
+  
+    <!-- Conversion Calculator -->
+    <div *ngIf="isConversionMode" class="calculator-conversion">
+      <div class="conversion-type">
+        <mat-form-field appearance="fill">
+          <mat-label>Conversion Type</mat-label>
+          <mat-select [(ngModel)]="conversionType" (selectionChange)="changeConversionType($event.value)">
+            <mat-option *ngFor="let type of conversionTypes" [value]="type">
+              {{ type | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <div class="conversion-units">
+        <div class="from-unit">
+          <mat-form-field appearance="fill">
+            <mat-label>From</mat-label>
+            <mat-select [(ngModel)]="fromUnit">
+              <mat-option *ngFor="let unit of unitMappings[conversionType]" [value]="unit">
+                {{ unit | titlecase }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="conversion-input">
+            <input matInput [(ngModel)]="conversionValue" placeholder="Value" type="number">
+          </mat-form-field>
+        </div>
+        
+        <div class="to-unit">
+          <mat-form-field appearance="fill">
+            <mat-label>To</mat-label>
+            <mat-select [(ngModel)]="toUnit">
+              <mat-option *ngFor="let unit of unitMappings[conversionType]" [value]="unit">
+                {{ unit | titlecase }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="conversion-result">
+            <input matInput [value]="conversionResult" readonly placeholder="Result">
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="conversion-actions">
+        <button mat-raised-button color="primary" (click)="convert()">Convert</button>
+        <button mat-raised-button (click)="resetConversion()">Reset</button>
+      </div>
+    </div>
+  
+    <!-- History Panel -->
+    <div *ngIf="showHistory" class="history-panel">
+      <div class="history-header">
+        <h3>History</h3>
+        <button mat-icon-button (click)="clearHistory()">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="toggleHistory()">
+            <mat-icon>close</mat-icon>
+          </button>
+      </div>
+      <div class="history-list">
+        <div *ngFor="let item of history" class="history-item">
+          {{ item }}
+        </div>
+        <div *ngIf="history.length === 0" class="history-empty">
+          No calculations yet
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,51 @@
+<!-- upload-dialog.component.html -->
+<div class="upload-dialog" [@fadeIn]>
+    <div class="dialog-header">
+      <h2 mat-dialog-title>Upload Materials</h2>
+      <button 
+        mat-icon-button 
+        class="close-button" 
+        (click)="dialogRef.close()" 
+        aria-label="Close dialog"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  
+    <mat-dialog-content>
+      <div 
+        class="upload-area"
+        [class.dragging]="isDragging"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+      >
+        <div class="upload-content">
+          <mat-icon>cloud_upload</mat-icon>
+          <p>Drag and drop your PDF/DOC files here</p>
+          <p>or</p>
+          <label for="fileInput">
+            <button mat-raised-button color="primary" (click)="fileInput.click()">Browse Files</button>
+          </label>
+          <input 
+            type="file" 
+            id="fileInput"
+            #fileInput 
+            accept=".pdf,.doc,.docx" 
+            (change)="onFileSelected($event)" 
+            multiple
+            hidden
+          >
+        </div>
+      </div>
+  
+      <div *ngIf="files.length > 0" class="uploading-list">
+        <h3>Uploading...</h3>
+        <div *ngFor="let file of files" class="file-item">
+          <mat-icon>description</mat-icon>
+          <span>{{ file.name }} ({{ file.size | number }} bytes)</span>
+          <mat-spinner diameter="20"></mat-spinner>
+        </div>
+      </div>
+    </mat-dialog-content>
+  </div>

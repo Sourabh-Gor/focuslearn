@@ -1,0 +1,185 @@
+.custom-toolbar {
+  background-color: #1a1a1a;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #333;
+  overflow: visible; /* Fix for tooltip visibility */
+}
+
+/* Default Button Styling */
+button[mat-raised-button] {
+  color: white;
+  padding: 8px 16px;
+  min-width: 100px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Save Button (Green) */
+button[mat-raised-button].save-button {
+  background-color: #19d27f;
+}
+
+button[mat-raised-button].save-button:hover {
+  background-color: #0eac65;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Flashcard Button (Different Color - Vibrant Purple) */
+button[mat-raised-button].flashcard-button {
+  background-color: #7b1fa2;
+}
+
+button[mat-raised-button].flashcard-button:hover {
+  background-color: #4a148c;
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Disabled Button Styling */
+button[mat-raised-button].disabled-button {
+  background-color: #b0bec5 !important;
+  color: #eceff1 !important;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
+
+.disabled-button {
+  opacity: 0.6;
+  pointer-events: none; // Prevents clicks
+  filter: grayscale(100%); // Makes it look disabled
+  cursor: not-allowed;
+}
+
+.button-text {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+:host ::ng-deep .mat-tooltip {
+  background-color: rgba(66, 66, 66, 0.9);
+  color: white;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+/* Ensure viewer doesn't overlap toolbar */
+:host ::ng-deep .ngx-extended-pdf-viewer {
+  max-height: calc(90vh - 48px);
+}
+
+.summary-side-card {
+  position: fixed;
+  top: 63px; /* Adjusted to appear below the navbar */
+  right: 0;
+  width: 600px;
+  height: calc(100vh - 64px); /* Ensures it doesn't overlap navbar */
+  background: rgba(30, 30, 30, 0.9); /* Glassmorphism effect */
+  backdrop-filter: blur(12px); /* Soft background blur */
+  color: white;
+  padding: 20px;
+  box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease-in-out, opacity 0.3s ease-in-out;
+  transform: translateX(100%);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* When open, smoothly slide in */
+.summary-side-card.open {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Header (Better Spacing & Readability) */
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.summary-header h3 {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Close button with hover effect */
+.summary-header button {
+  background: rgba(146, 144, 144, 0.938);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.summary-header button:hover {
+  background: rgb(255, 255, 255);
+  transform: scale(1.1);
+}
+
+/* Summary content (Better Readability) */
+.summary-content {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 16px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+  padding-right: 10px;
+  max-height: calc(100vh - 120px);
+}
+
+/* Smooth Scroll */
+.summary-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.summary-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+.summary-content p {
+  margin-bottom: 10px;
+}
+
+/* Loading Spinner Centering */
+mat-spinner {
+  display: block;
+  margin: 20px auto;
+}
+
+/* Webkit Scrollbar */
+.summary-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.summary-content::-webkit-scrollbar-thumb {
+  background: #00acc1; /* Change to match your theme */
+  border-radius: 8px;
+  transition: background 0.3s;
+  opacity: 1 !important; /* Force visibility */
+}
+
+.summary-content::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+  border-radius: 8px;
+}

@@ -1,0 +1,68 @@
+<!-- Custom Toolbar -->
+<div class="custom-toolbar">
+  <button mat-raised-button color="primary" (click)="savePdf()" matTooltip="Save PDF" matTooltipPosition="below"
+    aria-label="Save PDF" [disabled]="pdfFailed || !pdfUrl || isLoading()"
+    [ngClass]="{ 'disabled-button': pdfFailed || !pdfUrl || isLoading() }" class="save-button">
+    <mat-icon>save</mat-icon>
+    <span class="button-text">Save</span>
+  </button>
+  <button mat-raised-button color="accent" (click)="generateFlashcard()"
+    [disabled]="!selectedText || isLoading() || pdfFailed || !pdfUrl "
+    [ngClass]="{ 'disabled-button': !selectedText || isLoading() || pdfFailed || !pdfUrl }" class="flashcard-button">
+    <mat-icon>note</mat-icon>
+    <span class="button-text">Generate Flashcard</span>
+  </button>
+  <button mat-raised-button color="warn" (click)="generateSummary()"
+    [disabled]="pdfFailed || !pdfUrl || isLoading() || isSummaryVisible"
+    [ngClass]="{ 'disabled-button': pdfFailed || !pdfUrl || isLoading() || isSummaryVisible}" class="summary-button">
+    <mat-icon>summarize</mat-icon>
+    <span class="button-text">Summarize</span>
+  </button>
+  <button mat-raised-button color="primary" (click)="toggleReadAloud()" matTooltip="Read Aloud"
+    matTooltipPosition="below" aria-label="Read Aloud" class="read-aloud-button"
+    [disabled]="pdfFailed || !pdfUrl || isLoading()"
+    [ngClass]="{ 'disabled-button': pdfFailed || !pdfUrl || isLoading()}">
+    <mat-icon>{{ isReading ? 'pause' : 'volume_up' }}</mat-icon>
+    <span class="button-text">{{ isReading ? 'Pause' : 'Read Aloud' }}</span>
+  </button>
+  <button mat-raised-button color="primary" (click)="openCalculator()" matTooltip="Calculator"
+    matTooltipPosition="below" aria-label="Calculator"
+    [disabled]="pdfFailed || !pdfUrl || isLoading()"
+    [ngClass]="{ 'disabled-button': pdfFailed || !pdfUrl || isLoading()}">
+    <mat-icon>{{'calculate'}}</mat-icon>
+    <span class="button-text">Calculator</span>
+  </button>
+  <button mat-raised-button color="primary" 
+        (click)="openDictionary()" 
+        matTooltip="Dictionary" 
+        matTooltipPosition="below" 
+        aria-label="Dictionary"
+        [disabled]="!selectedText || pdfFailed || !pdfUrl || isLoading()" 
+        [ngClass]="{ 'disabled-button': !selectedText || pdfFailed || !pdfUrl || isLoading()}">
+  <mat-icon>book</mat-icon>
+  <span class="button-text">Dictionary</span>
+</button>
+
+</div>
+
+<!-- PDF Viewer (unchanged) -->
+<ngx-extended-pdf-viewer [src]="pdfUrl" useBrowserLocale="true" [showSidebarButton]="true" [showOpenFileButton]="false"
+  [showHandToolButton]="true" [showFindButton]="false" [showStampEditor]="false" [textLayer]="true" [showBorders]="true"
+  [showSecondaryToolbarButton]="false" [showPresentationModeButton]="true" [handTool]="false"
+  (pdfLoaded)="onPdfLoaded()" (textSelected)="onTextSelected($event)"
+  style="height: calc(90vh - 48px); width: 100%; display: block;" theme="dark" (error)="onError($event)"
+  (pdfLoadingFailed)="onError($event)" [enableDragAndDrop]="false">
+</ngx-extended-pdf-viewer>
+
+<div class="summary-side-card" [class.open]="isSummaryVisible">
+  <div class="summary-header">
+    <h3>Summary</h3>
+    <button mat-icon-button (click)="closeSummary()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="summary-content">
+    <p *ngIf="summary">{{ summary }}</p>
+    <mat-spinner *ngIf="isLoading()" diameter="40"></mat-spinner>
+  </div>
+</div>

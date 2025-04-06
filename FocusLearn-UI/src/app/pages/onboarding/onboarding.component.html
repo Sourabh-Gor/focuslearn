@@ -1,0 +1,50 @@
+<div class="onboarding-container" [@fadeIn]>
+  <!-- Step 1: Welcome -->
+  <div *ngIf="step === 1" class="step" [@slideIn]>
+      <h1>Welcome to FocusLearn!</h1>
+      <p>Let’s find the perfect study session length for you.</p>
+      <p>We’ll tailor your study plan to match your focus style.</p>
+      <button mat-raised-button color="primary" (click)="nextStep()">Start</button>
+  </div>
+
+  <!-- Step 2: Attention Span -->
+  <div *ngIf="step === 2" class="step" [@slideIn]>
+      <h2>How long can you stay focused?</h2>
+      <div class="options">
+          <button mat-button (click)="selectAttentionSpan(15)">Less than 15 min</button>
+          <button mat-button (click)="selectAttentionSpan(20)">15–20 min</button>
+          <button mat-button (click)="selectAttentionSpan(30)">20–30 min</button>
+          <button mat-button (click)="selectAttentionSpan(45)">30–45 min</button>
+          <button mat-button (click)="selectAttentionSpan(60)">More than 45 min</button>
+      </div>
+  </div>
+
+  <!-- Step 3: Study Preference -->
+  <div *ngIf="step === 3" class="step" [@slideIn]>
+      <h2>How do you prefer to study?</h2>
+      <div class="options">
+          <button mat-button (click)="selectStudyPreference('short')">Short bursts</button>
+          <button mat-button (click)="selectStudyPreference('balanced')">Balanced sessions</button>
+          <button mat-button (click)="selectStudyPreference('long')">Long blocks</button>
+      </div>
+  </div>
+
+  <!-- Step 4: Common Distractions -->
+  <div *ngIf="step === 4" class="step" [@slideIn]>
+      <h2>What distracts you most?</h2>
+      <mat-form-field appearance="outline">
+          <mat-label>Common Distractions (e.g., phone, noise)</mat-label>
+          <input matInput [(ngModel)]="commonDistractions" placeholder="Enter distractions">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="nextStep()">Next</button>
+  </div>
+
+  <!-- Step 5: Confirmation -->
+  <div *ngIf="step === 5" class="step" [@slideIn]>
+      <h2>Your Study Plan</h2>
+      <p>Based on your input, we suggest starting with <strong>{{ suggestedSessionTime }}-minute sessions</strong>.</p>
+      <p>Distractions noted: {{ commonDistractions || 'None' }}</p>
+      <p>If a chapter takes longer, we’ll break it into manageable sessions with quizzes.</p>
+      <button mat-raised-button color="primary" (click)="completeOnboarding()">Let’s Study!</button>
+  </div>
+</div>

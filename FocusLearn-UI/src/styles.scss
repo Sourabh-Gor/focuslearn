@@ -1,0 +1,50 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Scrollbar Track */
+::-webkit-scrollbar {
+  width: 8px; /* Width for vertical scrollbar */
+  height: 8px; /* Height for horizontal scrollbar */
+}
+
+/* Scrollbar Handle */
+::-webkit-scrollbar-thumb {
+  background: #00acc1; /* Change to match your theme */
+  border-radius: 8px;
+  transition: background 0.3s;
+  opacity: 1 !important; /* Force visibility */
+}
+
+/* Scrollbar Handle on Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #00838f; /* Slightly darker shade */
+}
+
+/* Scrollbar Track (Background) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light background */
+  border-radius: 8px;
+}
+
+.highlight-word {
+  background-color: rgba(255, 255, 0, 0.366); /* Semi-transparent yellow */
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
